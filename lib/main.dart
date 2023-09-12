@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:practice5/HomeScreen.dart';
+import 'package:practice5/MyTheme.dart';
+import 'package:practice5/home/quran/suraDetails.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,8 +17,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: HomeScreen.routeName,
       routes: {
-        HomeScreen.routeName:(context) => HomeScreen()
+        HomeScreen.routeName:(context) => HomeScreen(),
+        suraDetails.routeName:(context) => suraDetails()
       },
+      theme: myTheme.lightmode
 
     );
   }
