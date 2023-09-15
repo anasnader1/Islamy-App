@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:practice5/MyTheme.dart';
 import 'package:practice5/home/quran/itemSuradetails.dart';
+import 'package:practice5/providers/app_config_providers.dart';
+import 'package:provider/provider.dart';
 
 class suraDetails extends StatefulWidget {
   static const String routeName='suraDetails';
@@ -15,6 +17,7 @@ class _suraDetailsState extends State<suraDetails> {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<AppConfigProvider>(context);
     var args= ModalRoute.of(context)?.settings.arguments as suraDetailsargs;
     if(verses.isEmpty){
       loadFile(args.index);
@@ -22,6 +25,15 @@ class _suraDetailsState extends State<suraDetails> {
 
     return Stack(
       children: [
+        provider.isDarkMode()?
+        Image.asset(
+          'assets/images/dark_bg.png',
+          width: double.infinity,
+          height: double.infinity,
+          fit: BoxFit.fill,
+        )
+
+            :
         Image.asset(
           'assets/images/default_bg.png',
           width: double.infinity,

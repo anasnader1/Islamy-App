@@ -5,6 +5,9 @@ import 'package:practice5/home/hadith/hadith_tab.dart';
 import 'package:practice5/home/quran/quran_tab.dart';
 import 'package:practice5/home/radio/radio_tab.dart';
 import 'package:practice5/home/sebha/sebha_tab.dart';
+import 'package:practice5/home/settings/Settings_tab.dart';
+import 'package:practice5/providers/app_config_providers.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = 'HomeScreen';
@@ -18,14 +21,25 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var provider =Provider.of<AppConfigProvider>(context);
     return Stack(
       children: [
+       provider.isDarkMode()?
+       Image.asset(
+         'assets/images/dark_bg.png',
+         width: double.infinity,
+         height: double.infinity,
+         fit: BoxFit.fill,
+       )
+
+        :
         Image.asset(
           'assets/images/default_bg.png',
           width: double.infinity,
           height: double.infinity,
           fit: BoxFit.fill,
         ),
+
         Scaffold(
           appBar: AppBar(
             title:
@@ -46,14 +60,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     label: 'Quran'),
                 BottomNavigationBarItem(
                   icon: ImageIcon(AssetImage('assets/images/icon_hadeth.png')),
-                  label: 'Quran',
+                  label: 'Hadeth',
                 ),
                 BottomNavigationBarItem(
                     icon: ImageIcon(AssetImage('assets/images/icon_sebha.png')),
-                    label: 'Quran'),
+                    label: 'Sebha'),
                 BottomNavigationBarItem(
                     icon: ImageIcon(AssetImage('assets/images/icon_radio.png')),
-                    label: 'Quran'),
+                    label: 'Radio'),
+                BottomNavigationBarItem(
+                    icon:Icon(Icons.settings),
+                    label: 'Settings'),
               ],
             ),
           ),
@@ -63,6 +80,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
   List<Widget>tabs= [
-    quranTab(),hadithTab(),sebhaTab(),radioTab()
+    quranTab(),hadithTab(),sebhaTab(),radioTab(),settingTab()
   ];
 }
