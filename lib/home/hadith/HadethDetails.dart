@@ -4,6 +4,8 @@ import 'package:practice5/MyTheme.dart';
 import 'package:practice5/home/hadith/hadith_tab.dart';
 import 'package:practice5/home/hadith/itemHadethdetails.dart';
 import 'package:practice5/home/quran/itemSuradetails.dart';
+import 'package:practice5/providers/app_config_providers.dart';
+import 'package:provider/provider.dart';
 
 class HadethDetails extends StatefulWidget {
   static const String routeName='HadethDetails';
@@ -17,6 +19,7 @@ class _HadethDetailsState extends State<HadethDetails> {
 
   @override
   Widget build(BuildContext context) {
+    var provider =Provider.of<AppConfigProvider>(context);
     var args = ModalRoute
         .of(context)
         ?.settings
@@ -25,6 +28,14 @@ class _HadethDetailsState extends State<HadethDetails> {
 
     return Stack(
       children: [
+        provider.isDarkMode()?
+    Image.asset(
+      'assets/images/dark_bg.png',
+      width: double.infinity,
+      height: double.infinity,
+      fit: BoxFit.fill,
+    )
+            :
         Image.asset(
           'assets/images/default_bg.png',
           width: double.infinity,
